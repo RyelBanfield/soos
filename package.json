@@ -2,17 +2,19 @@
   "name": "soos",
   "version": "0.0.1",
   "private": true,
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "start": "expo start"
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "start": "expo start --dev-client"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@supabase/supabase-js": "^2.2.3",
     "expo": "~47.0.9",
+    "expo-image-picker": "~14.0.2",
+    "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
+    "expo-system-ui": "~2.0.1",
     "react": "18.1.0",
     "react-native": "0.70.5",
     "react-native-elements": "^3.4.3",
