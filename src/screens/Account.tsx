@@ -1,7 +1,7 @@
 import { Button, Input } from "@rneui/themed";
 import { Session } from "@supabase/supabase-js";
 import React, { useEffect, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, View } from "react-native";
 
 import Avatar from "../components/Avatar";
 import { supabase } from "../lib/supabase";
@@ -43,7 +43,6 @@ const Account = ({ session }: { session: Session }) => {
   }, [session]);
 
   const updateProfile = async ({
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     username,
     avatar_url,
   }: {
@@ -76,8 +75,8 @@ const Account = ({ session }: { session: Session }) => {
   };
 
   return (
-    <View>
-      <View>
+    <View className="gap-3 p-9 pt-24">
+      <View className="mb-6">
         <Avatar
           size={200}
           url={avatarUrl}
@@ -88,11 +87,11 @@ const Account = ({ session }: { session: Session }) => {
         />
       </View>
 
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+      <View>
         <Input label="Email" value={session?.user?.email} disabled />
       </View>
 
-      <View style={styles.verticallySpaced}>
+      <View>
         <Input
           label="Username"
           value={username || ""}
@@ -100,34 +99,27 @@ const Account = ({ session }: { session: Session }) => {
         />
       </View>
 
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+      <View>
         <Button
           title={loading ? "Loading ..." : "Update"}
           onPress={() => updateProfile({ username, avatar_url: avatarUrl })}
           disabled={loading}
+          loading={loading}
+          radius="lg"
+          raised
         />
       </View>
 
-      <View style={styles.verticallySpaced}>
-        <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
+      <View>
+        <Button
+          title="Sign Out"
+          onPress={() => supabase.auth.signOut()}
+          radius="lg"
+          raised
+        />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: "stretch",
-  },
-  mt20: {
-    marginTop: 20,
-  },
-});
 
 export default Account;

@@ -34,9 +34,9 @@ const Auth = () => {
   };
 
   return (
-    <View className="p-9 gap-3">
+    <View className="gap-3 p-9 pt-24">
       <View className="w-full">
-        <Image source={logo} className="m-auto w-32 h-32" />
+        <Image source={logo} className="m-auto h-32 w-32" />
       </View>
 
       <View>

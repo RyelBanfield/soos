@@ -1,6 +1,7 @@
+import { Avatar, Button } from "@rneui/themed";
 import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useState } from "react";
-import { Alert, Button, Image, StyleSheet, View } from "react-native";
+import { Alert, View } from "react-native";
 
 import { supabase } from "../lib/supabase";
 
@@ -10,10 +11,9 @@ type Props = {
   onUpload: (filePath: string) => void;
 };
 
-const Avatar = ({ url, size = 150, onUpload }: Props) => {
+const AvatarComponent = ({ url, onUpload }: Props) => {
   const [uploading, setUploading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-  const avatarSize = { height: size, width: size };
 
   useEffect(() => {
     if (url) {
@@ -81,42 +81,35 @@ const Avatar = ({ url, size = 150, onUpload }: Props) => {
   };
 
   return (
-    <View>
+    <>
       {avatarUrl ? (
-        <Image
-          source={{ uri: avatarUrl }}
-          accessibilityLabel="Avatar"
-          style={[avatarSize, styles.avatar, styles.image]}
-        />
+        <View className="mx-auto mb-9">
+          <Avatar source={{ uri: avatarUrl }} size="xlarge" rounded />
+        </View>
       ) : (
-        <View style={[avatarSize, styles.avatar, styles.noImage]} />
+        <View className="mx-auto mb-9">
+          <Avatar
+            source={{
+              uri: "https://avatars.dicebear.com/api/bottts/meblue.svg",
+            }}
+            size="xlarge"
+            rounded
+          />
+        </View>
       )}
+
       <View>
         <Button
-          title={uploading ? "Uploading ..." : "Upload"}
+          title={"Upload"}
           onPress={uploadAvatar}
           disabled={uploading}
+          loading={uploading}
+          radius="lg"
+          raised
         />
       </View>
-    </View>
+    </>
   );
 };
 
-const styles = StyleSheet.create({
-  avatar: {
-    borderRadius: 5,
-    overflow: "hidden",
-    maxWidth: "100%",
-  },
-  image: {
-    objectFit: "cover",
-    paddingTop: 0,
-  },
-  noImage: {
-    backgroundColor: "#333",
-    border: "1px solid rgb(200, 200, 200)",
-    borderRadius: 5,
-  },
-});
-
-export default Avatar;
+export default AvatarComponent;
