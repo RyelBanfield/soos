@@ -4,9 +4,9 @@ import { Session } from "@supabase/supabase-js";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 
-import Account from "./components/Account";
-import Auth from "./components/Auth";
-import { supabase } from "./lib/supabase";
+import { supabase } from "./src/lib/supabase";
+import Account from "./src/screens/Account";
+import Auth from "./src/screens/Auth";
 
 const App = () => {
   const [session, setSession] = useState<Session | null>(null);

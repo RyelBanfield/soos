@@ -1,8 +1,10 @@
+import { Button, Input } from "@rneui/themed";
 import React, { useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
-import { Button, Input } from "react-native-elements";
+import { Alert, Image, View } from "react-native";
 
 import { supabase } from "../lib/supabase";
+
+const logo = require("../../assets/icon.png");
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -32,21 +34,22 @@ const Auth = () => {
   };
 
   return (
-    <View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+    <View className="p-9 gap-3">
+      <View className="w-full">
+        <Image source={logo} className="m-auto w-32 h-32" />
+      </View>
+
+      <View>
         <Input
-          label="Email"
-          leftIcon={{ type: "font-awesome", name: "envelope" }}
           onChangeText={(text) => setEmail(text)}
           value={email}
-          placeholder="email@address.com"
+          placeholder="Email"
           autoCapitalize={"none"}
         />
       </View>
-      <View style={styles.verticallySpaced}>
+
+      <View>
         <Input
-          label="Password"
-          leftIcon={{ type: "font-awesome", name: "lock" }}
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
@@ -54,37 +57,30 @@ const Auth = () => {
           autoCapitalize={"none"}
         />
       </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+
+      <View>
         <Button
           title="Sign in"
-          disabled={loading}
           onPress={() => signInWithEmail()}
+          disabled={loading}
+          loading={loading}
+          radius="lg"
+          raised
         />
       </View>
-      <View style={styles.verticallySpaced}>
+
+      <View>
         <Button
           title="Sign up"
-          disabled={loading}
           onPress={() => signUpWithEmail()}
+          disabled={loading}
+          loading={loading}
+          radius="lg"
+          raised
         />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: "stretch",
-  },
-  mt20: {
-    marginTop: 20,
-  },
-});
 
 export default Auth;

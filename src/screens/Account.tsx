@@ -1,10 +1,10 @@
+import { Button, Input } from "@rneui/themed";
 import { Session } from "@supabase/supabase-js";
 import React, { useEffect, useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
-import { Button, Input } from "react-native-elements";
 
+import Avatar from "../components/Avatar";
 import { supabase } from "../lib/supabase";
-import Avatar from "./Avatar";
 
 const Account = ({ session }: { session: Session }) => {
   const [loading, setLoading] = useState(true);
