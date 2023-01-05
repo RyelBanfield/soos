@@ -75,8 +75,8 @@ const Account = ({ session }: { session: Session }) => {
   };
 
   return (
-    <View className="gap-3 p-9 pt-24">
-      <View className="mb-6">
+    <View className="flex flex-grow gap-3 bg-white p-9">
+      <View className="mb-3">
         <Avatar
           size={200}
           url={avatarUrl}
@@ -84,6 +84,7 @@ const Account = ({ session }: { session: Session }) => {
             setAvatarUrl(url);
             updateProfile({ username, avatar_url: url });
           }}
+          showUploadButton={true}
         />
       </View>
 

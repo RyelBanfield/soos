@@ -1,17 +1,20 @@
 import { Avatar, Button } from "@rneui/themed";
 import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useState } from "react";
-import { Alert, View } from "react-native";
+import { Alert, Image, View } from "react-native";
 
 import { supabase } from "../lib/supabase";
+
+const avatarPlaceholder = require("../../assets/avatar.png");
 
 type Props = {
   size: number;
   url: string | null;
   onUpload: (filePath: string) => void;
+  showUploadButton: boolean;
 };
 
-const AvatarComponent = ({ url, onUpload }: Props) => {
+const AvatarComponent = ({ url, onUpload, showUploadButton }: Props) => {
   const [uploading, setUploading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
@@ -88,26 +91,22 @@ const AvatarComponent = ({ url, onUpload }: Props) => {
         </View>
       ) : (
         <View className="mx-auto mb-9">
-          <Avatar
-            source={{
-              uri: "https://avatars.dicebear.com/api/bottts/meblue.svg",
-            }}
-            size="xlarge"
-            rounded
-          />
+          <Image source={avatarPlaceholder} className="m-auto h-40 w-40" />
         </View>
       )}
 
-      <View>
-        <Button
-          title={"Upload"}
-          onPress={uploadAvatar}
-          disabled={uploading}
-          loading={uploading}
-          radius="lg"
-          raised
-        />
-      </View>
+      {showUploadButton && (
+        <View>
+          <Button
+            title={"Upload"}
+            onPress={uploadAvatar}
+            disabled={uploading}
+            loading={uploading}
+            radius="lg"
+            raised
+          />
+        </View>
+      )}
     </>
   );
 };
