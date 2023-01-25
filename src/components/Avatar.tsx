@@ -8,7 +8,6 @@ import { supabase } from "../lib/supabase";
 const avatarPlaceholder = require("../../assets/avatar.png");
 
 type Props = {
-  size: number;
   url: string | null;
   onUpload: (filePath: string) => void;
   showUploadButton: boolean;
@@ -87,7 +86,7 @@ const AvatarComponent = ({ url, onUpload, showUploadButton }: Props) => {
     <>
       {avatarUrl ? (
         <View className="mx-auto mb-9">
-          <Avatar source={{ uri: avatarUrl }} size="xlarge" rounded />
+          <Avatar source={{ uri: avatarUrl }} size={200} rounded />
         </View>
       ) : (
         <View className="mx-auto mb-9">
@@ -98,7 +97,7 @@ const AvatarComponent = ({ url, onUpload, showUploadButton }: Props) => {
       {showUploadButton && (
         <View>
           <Button
-            title={"Upload"}
+            title={"Upload Avatar"}
             onPress={uploadAvatar}
             disabled={uploading}
             loading={uploading}

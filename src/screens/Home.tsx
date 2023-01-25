@@ -22,21 +22,16 @@ const Home = ({ navigation, session }: Props) => {
         if (!session?.user) throw new Error("No user on the session!");
 
         let { data, error, status } = await supabase
-          .from("profiles")
-          .select(`username, avatar_url`)
+          .from("users")
+          .select(`avatar_url`)
           .eq("id", session?.user.id)
           .single();
-        if (error && status !== 406) {
-          throw error;
-        }
 
-        if (data) {
-          setAvatarUrl(data.avatar_url);
-        }
+        if (error && status !== 406) throw error;
+
+        if (data) setAvatarUrl(data.avatar_url);
       } catch (error) {
-        if (error instanceof Error) {
-          Alert.alert(error.message);
-        }
+        if (error instanceof Error) Alert.alert(error.message);
       }
     };
 
@@ -44,7 +39,7 @@ const Home = ({ navigation, session }: Props) => {
   }, [session]);
 
   return (
-    <View className="flex flex-grow gap-3 bg-white p-9">
+    <View className="flex flex-grow items-center gap-3 bg-white p-9">
       {/* Top row with logo */}
       <View className="flex flex-row items-center justify-between">
         <View className="w-1/3">
@@ -63,7 +58,6 @@ const Home = ({ navigation, session }: Props) => {
       {/* Avatar */}
       <View>
         <Avatar
-          size={200}
           url={avatarUrl}
           onUpload={(url: string) => {
             setAvatarUrl(url);
@@ -75,34 +69,35 @@ const Home = ({ navigation, session }: Props) => {
       {/* Row of buttons */}
       <View className="mb-3 flex flex-row justify-center">
         <View className="mr-3">
-          <Button radius="lg" raised>
-            <Icon name="pin-drop" />
+          <Button size="lg" radius="lg" raised color="#0024DF">
+            <Icon name="pin-drop" color="#FFF" />
           </Button>
         </View>
         <View className="ml-3">
-          <Button radius="lg" raised>
-            <Icon name="photo-camera" />
+          <Button size="lg" radius="lg" raised color="#0024DF">
+            <Icon name="photo-camera" color="#FFF" />
           </Button>
         </View>
       </View>
 
       {/* Col of buttons */}
-      <View className="mb-3">
+      <View className="mb-3 w-60">
         <Button
           title="Edit Profile"
           size="lg"
           radius="lg"
           raised
-          onPress={() => navigation.navigate("Account")}
+          color="#4D85FF"
+          onPress={() => navigation.navigate("Edit Profile")}
         />
       </View>
 
-      <View className="mb-3">
-        <Button title="Edit" size="lg" radius="lg" raised />
+      <View className="mb-3 w-60">
+        <Button title="Edit" size="lg" radius="lg" raised color="#4D85FF" />
       </View>
 
-      <View className="mb-3">
-        <Button title="SOOS" size="lg" radius="lg" raised />
+      <View className="mb-3 w-60">
+        <Button title="SOOS" size="lg" radius="lg" raised color="#0024DF" />
       </View>
     </View>
   );
