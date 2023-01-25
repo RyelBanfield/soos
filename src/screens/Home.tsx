@@ -29,7 +29,7 @@ const Home = ({ navigation, session }: Props) => {
 
         if (error && status !== 406) throw error;
 
-        if (data) setAvatarUrl(data.avatar_url);
+        if (data) setAvatarUrl(data.avatar_url as string);
       } catch (error) {
         if (error instanceof Error) Alert.alert(error.message);
       }

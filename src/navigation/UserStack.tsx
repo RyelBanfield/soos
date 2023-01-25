@@ -24,12 +24,12 @@ const HomeScreen = ({ session }: { session: Session }) => {
           <ScanScreen {...props} key={session.user.id} session={session} />
         )}
       </Tab.Screen>
-      <Tab.Screen name="Family Connect" options={{ headerShown: true }}>
+      <Tab.Screen name="Family Connect" options={{ headerShown: false }}>
         {(props) => (
           <FamilyConnect {...props} key={session.user.id} session={session} />
         )}
       </Tab.Screen>
-      <Tab.Screen name="Settings" options={{ headerShown: true }}>
+      <Tab.Screen name="Settings" options={{ headerShown: false }}>
         {(props) => (
           <Settings {...props} key={session.user.id} session={session} />
         )}
